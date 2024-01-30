@@ -28,7 +28,6 @@ pipeline {
 		//sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
 		//}
 		// }
-	}
 
 	        stage('Docker Build and Tag') {
 		         steps {
