@@ -37,7 +37,6 @@ pipeline {
 
 		               }
 	                   }
-                        }
 
                  stage('Publish image to Docker Hub') {
                           steps {
@@ -46,7 +45,6 @@ pipeline {
                                     sh  'docker push preethi/samplewebapp:$BUILD_NUMBER' 
                                 }
                              }
-                          }
 
 //stage('Run Docker container on Jenkins Agent') {
 
@@ -65,4 +63,5 @@ pipeline {
 //}
 // }
 //}
-}
+ }
+}		
