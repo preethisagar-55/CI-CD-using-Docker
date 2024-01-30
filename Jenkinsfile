@@ -37,10 +37,10 @@ pipeline {
         //withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
           //sh  'docker push nikhilnidhi/samplewebapp:latest'
         //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
-        }
+       // }
                   
-          }
-        }
+         // }
+      //  }
      
       //stage('Run Docker container on Jenkins Agent') {
              
@@ -48,15 +48,15 @@ pipeline {
 			{
               //  sh "docker run -d -p 8003:8080 nikhilnidhi/samplewebapp"
  
-            }
-        }
+            //}
+      //  }
  //stage('Run Docker container on remote hosts') {
              
             //steps {
                 //sh "docker -H ssh://jenkins@172.31.28.25 run -d -p 8003:8080 nikhilnidhi/samplewebapp"
  
-            }
-        }
+           // }
+        //}
     }
 	}
     
