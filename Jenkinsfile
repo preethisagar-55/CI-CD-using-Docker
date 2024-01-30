@@ -45,7 +45,7 @@ pipeline {
       //stage('Run Docker container on Jenkins Agent') {
              
            // steps 
-			{
+			//{
               //  sh "docker run -d -p 8003:8080 nikhilnidhi/samplewebapp"
  
             //}
