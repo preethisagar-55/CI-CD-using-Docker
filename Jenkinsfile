@@ -45,7 +45,6 @@ pipeline {
                                     sh  'docker push preethi/samplewebapp:latest'
                                     sh  'docker push preethi/samplewebapp:$BUILD_NUMBER' 
                                 }
-
                              }
                           }
 
