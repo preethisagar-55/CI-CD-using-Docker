@@ -30,15 +30,14 @@ pipeline {
    }
     
 	 
-  stage('Docker Build and Tag') {
-           steps {
-              
-                sh 'docker build -t samplewebapp:latest .' 
-                sh 'docker tag samplewebapp preethi/samplewebapp:latest'
-                sh 'docker tag samplewebapp preethi/samplewebapp:$BUILD_NUMBER'
+         stage('Docker Build and Tag') {
+                  steps {
+                       sh 'docker build -t samplewebapp:latest .' 
+                       sh 'docker tag samplewebapp preethi/samplewebapp:latest'
+                       sh 'docker tag samplewebapp preethi/samplewebapp:$BUILD_NUMBER'
                
-          }
-        }
+                 }
+               }
      
   //stage('Publish image to Docker Hub') {
           
