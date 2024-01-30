@@ -3,6 +3,9 @@ pipeline {
 	tools {
 		maven "maven 3.6.3"
 	}
+	environment {
+	    ARTIFACTORY_ACCESS_TOKEN = credentials('jfrog')
+	}
 
 	stages {
 		stage('checkout') {
@@ -19,6 +22,14 @@ pipeline {
 				sh 'mvn package'
 			}
 		}
+		stage('Push artifacts into artifactory') {
+                         steps {
+                                 sh 'curl -fL https://getcli.jfrog.io | sh'
+                                 sh './jfrog rt u --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  -demo-release/'
+                                 jf 'rt build-publish'
+                                 //  sh  './jfrog rt bp  --url https://slk.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ${JOB_NAME} ${BUILD_NUMBER}'
+                                }
+                             }
 		//stage('Static Code Analysis') {
 		//environment {
 		//SONAR_URL = "http://3.109.212.222:9000"
@@ -38,13 +49,13 @@ pipeline {
 		               }
 	                   }
 
-                 stage('Publish image to Docker Hub') {
-                          steps {
-                                    withDockerRegistry([ credentialsId: "docker", url: "https://hub.docker.com" ]) {
-                                    sh  'docker push preethi/samplewebapp:latest'
-                                    sh  'docker push preethi/samplewebapp:$BUILD_NUMBER' 
-                                }
-                             }
+                 //stage('Publish image to Docker Hub') {
+                          //steps {
+                                    //withDockerRegistry([ credentialsId: "docker", url: "https://hub.docker.com" ]) {
+                                    //sh  'docker push preethi/samplewebapp:latest'
+                                    //sh  'docker push preethi/samplewebapp:$BUILD_NUMBER' 
+                                //}
+                             //}
 
 //stage('Run Docker container on Jenkins Agent') {
 
