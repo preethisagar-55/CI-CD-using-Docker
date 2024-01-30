@@ -18,6 +18,20 @@ pipeline {
                 sh 'mvn package'             
           }
         }
+	 stage('Static code analysis'){
+            
+            steps{
+                
+                script{
+                    
+                    withSonarQubeEnv(credentialsId: 'sonar') {
+                        
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                   }
+                    
+                }
+            }
         
 
   stage('Docker Build and Tag') {
