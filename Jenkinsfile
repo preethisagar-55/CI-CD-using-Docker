@@ -39,16 +39,15 @@ pipeline {
 	                   }
                         }
 
-//stage('Publish image to Docker Hub') {
+                 stage('Publish image to Docker Hub') {
+                          steps {
+                                    withDockerRegistry([ credentialsId: "dockerHub", url: "https://hub.docker.com" ]) {
+                                    sh  'docker push preethi/samplewebapp:latest'
+                                    sh  'docker push preethi/samplewebapp:$BUILD_NUMBER' 
+                                }
 
-// steps {
-//withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-//sh  'docker push nikhilnidhi/samplewebapp:latest'
-//  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
-// }
-
-// }
-//  }
+                             }
+                          }
 
 //stage('Run Docker container on Jenkins Agent') {
 
