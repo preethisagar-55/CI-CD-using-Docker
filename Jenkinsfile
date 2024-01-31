@@ -6,6 +6,7 @@ pipeline {
 	environment {
 	    ARTIFACTORY_ACCESS_TOKEN = credentials('jfrog')
 	    SONAR_AUTH_TOKEN = credentials('sonar')
+	    JFROG_URL= https://preethisagar114376.jfrog.io/artifactory
 	}
 
 	stages {
@@ -26,7 +27,7 @@ pipeline {
 		stage('Push artifacts into artifactory') {
                          steps {
                                  //sh 'curl -fL https://getcli.jfrog.io | sh'
-                                 sh './jfrog rt u --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  maven-demo/'
+                                 sh './jfrog rt u --url ${JFROG_URL} --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  maven-demo/'
                                  jf 'rt build-publish'
                                  //  sh  './jfrog rt bp  --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ${JOB_NAME} ${BUILD_NUMBER}'
                                 }
