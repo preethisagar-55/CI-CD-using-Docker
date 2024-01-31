@@ -6,7 +6,7 @@ pipeline {
 	environment {
 	    ARTIFACTORY_ACCESS_TOKEN = credentials('jfrog')
 	    SONAR_AUTH_TOKEN = credentials('sonar')
-	    JFROG_URL= https://preethisagar114376.jfrog.io/artifactory
+	    JFROG_URL= 'https://preethisagar114376.jfrog.io/artifactory'
 	}
 
 	stages {
