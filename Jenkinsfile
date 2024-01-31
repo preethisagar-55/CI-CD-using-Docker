@@ -4,9 +4,11 @@ pipeline {
 		maven "maven 3.6.3"
 	}
 	environment {
-	    ARTIFACTORY_ACCESS_TOKEN = credentials('jfrog')
+	    ARTIFACTORY_ACCESS_TOKEN = credentials("jfrog")
 	    SONAR_AUTH_TOKEN = credentials('sonar')
 	    JFROG_URL= 'https://preethisagar114376.jfrog.io/artifactory'
+	    DOCKER_IMAGE_NAME = "slk.jfrog.io/fis-demo-dockerhub/app-image.${BUILD_ID}.${env.BUILD_NUMBER}"
+
 	}
 
 	stages {
@@ -27,6 +29,7 @@ pipeline {
 		stage('Push artifacts into artifactory') {
                          steps {
                                  //sh 'curl -fL https://getcli.jfrog.io | sh'
+				 sh 'echo -e ${ARTIFACTORY_ACCESS_TOKEN} '
                                  sh './jfrog rt u --url ${JFROG_URL} --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  maven-demo/'
                                  jf 'rt build-publish'
                                  //  sh  './jfrog rt bp  --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ${JOB_NAME} ${BUILD_NUMBER}'
@@ -51,6 +54,9 @@ pipeline {
 
 		               }
 	                   }
+		stage('Trivy Scan') {
+			 steps {
+				 sh 'trivy image $DOCKER_IMAGE_NAME  --output report.html || true'
 
                  stage('Publish image to Docker Hub') {
                           steps {
