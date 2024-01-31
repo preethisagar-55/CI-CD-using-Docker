@@ -50,8 +50,8 @@ pipeline {
 	        stage('Docker Build and Tag') {
 		         steps {
 			          sh 'docker build -t samplewebapp:latest .'
-			          sh 'docker tag samplewebapp preethi/samplewebapp:latest'
-			          sh 'docker tag samplewebapp preethi/samplewebapp:$BUILD_NUMBER'
+			          sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
+			          sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
 
 		               }
 	                   }
@@ -59,8 +59,8 @@ pipeline {
                  stage('Publish image to Docker Hub') {
                           steps {
                                     withDockerRegistry([ credentialsId: "docker", url: "" ]) {
-                                    sh  'docker push preethi/samplewebapp:latest'
-                                    sh  'docker push preethi/samplewebapp:$BUILD_NUMBER' 
+                                    sh  'docker push haripreethisagar/ciproject:latest'
+                                    sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
                                 }
                              }
 
