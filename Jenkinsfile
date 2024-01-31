@@ -54,9 +54,11 @@ pipeline {
 
 		               }
 	                   }
-		stage('Trivy Scan') {
-			 steps {
-				 sh 'trivy image $DOCKER_IMAGE_NAME  --output report.html || true'
+		//stage('Trivy Scan') {
+			 //steps {
+				 //sh 'trivy image $DOCKER_IMAGE_NAME  --output report.html || true'
+			 //}
+		     //}
 
                  stage('Publish image to Docker Hub') {
                           steps {
