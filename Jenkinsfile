@@ -26,7 +26,7 @@ pipeline {
 		stage('Push artifacts into artifactory') {
                          steps {
                                  //sh 'curl -fL https://getcli.jfrog.io | sh'
-                                 sh './jfrog rt u --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  demo-release/'
+                                 sh './jfrog rt u --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  docker-demo/'
                                  jf 'rt build-publish'
                                  //  sh  './jfrog rt bp  --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ${JOB_NAME} ${BUILD_NUMBER}'
                                 }
