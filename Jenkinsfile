@@ -73,7 +73,8 @@ pipeline {
 		  stage('push docker image to artifactory'){
                             steps{
 				script{
-					 withCredentials([usernamePassword(credentialsId:"${ARTIFACTORY_CREDS_ID}",variable:'CREDENTIALS)]){
+					 withCredentials([usernamePassword(credentialsId:"${ARTIFACTORY_CREDS_ID}",variable:'CREDENTIALS')]){
+						                                 def creds = sh(script:'echo $CREDENTIALS',returnStdout: true).trim()
 					 env.ARTIFACTORY_URL = ARTIFACTORY_URL
 					 env.DOCKER_IMAGE_NAME = DOCKER_IMAGE_NAME
 					 env.DOCKER_TAG = DOCKER_TAG
