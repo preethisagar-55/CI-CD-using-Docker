@@ -26,15 +26,15 @@ pipeline {
 				sh 'mvn package'
 			}
 		}
-		//stage('Push artifacts into artifactory') {
-                         //steps {
+		stage('Push artifacts into artifactory') {
+                         steps {
                                  //sh 'curl -fL https://getcli.jfrog.io | sh'
 				 //sh 'echo ${ARTIFACTORY_ACCESS_TOKEN}'
-                                 //sh './jfrog rt u --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  maven-demo/'
-                                 //jf 'rt build-publish'
+                                 sh './jfrog rt u --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  maven-demo/'
+                                 jf 'rt build-publish'
                                  //  sh  './jfrog rt bp  --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ${JOB_NAME} ${BUILD_NUMBER}'
-                                //}
-                             //}
+                                }
+                             }
 		stage('Static Code Analysis') {
 		  environment {
 		    SONAR_URL = "http://3.109.212.222:9000"
