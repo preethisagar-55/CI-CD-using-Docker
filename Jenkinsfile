@@ -54,20 +54,20 @@ pipeline {
 
 		               }
 	                   }
-		stage('Trivy Scan') {
-			 steps {
-				 sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER  --output report.html || true'
-			 }
-		     }
+		//stage('Trivy Scan') {
+			 //steps {
+				 //sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER  --output report.html || true'
+			 //}
+		     //}
 
-                stage('Publish image to Docker Hub') {
-                          steps {
-                                    withDockerRegistry([ credentialsId: "docker", url: "" ]) {
-                                    sh  'docker push haripreethisagar/ciproject:latest'
-                                    sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
-                                }
-                             }
-		       }   
+                //stage('Publish image to Docker Hub') {
+                          //steps {
+                                    //withDockerRegistry([ credentialsId: "docker", url: "" ]) {
+                                    //sh  'docker push haripreethisagar/ciproject:latest'
+                                    //sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
+                                //}
+                             //}
+		       //}   
 		stage('Push artifacts into artifactory') {
                           steps { 
 				   withJfrogRegistry([credentialsId:"jfrog", url:"preethisagar114376.jfrog.io"]){
