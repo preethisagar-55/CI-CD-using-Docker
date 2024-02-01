@@ -67,6 +67,7 @@ pipeline {
                                     sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
                                 }
                              }
+		       }   
 		stage('Push artifacts into artifactory') {
                           steps {
 				   sh  'docker login -upreethi.sagar55@gmail.com preethisagar114376.jfrog.io'
