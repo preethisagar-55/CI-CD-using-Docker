@@ -74,7 +74,7 @@ pipeline {
                             steps{
 				script{
 					 withCredentials([usernamePassword(credentialsId:"${ARTIFACTORY_CREDS_ID}",variable:'CREDENTIALS)]){
-									   def creds = sh(script: 'echo $CREDENTIALS', returnStdout:true).trim()
+									   //def creds = sh(script: 'echo $CREDENTIALS', returnStdout:true).trim()
 					 //env.USERNAME = USERNAME
 					 //env.PASSWORD = PASSWORD
 					 env.ARTIFACTORY_URL = ARTIFACTORY_URL
