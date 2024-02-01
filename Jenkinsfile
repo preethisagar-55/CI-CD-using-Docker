@@ -70,6 +70,13 @@ pipeline {
                                 //}
                              //}
 		       //}   
+		  stage('install jfrog cli'){
+		     steps{
+			     script{
+				     sh 'wget -O jfrog https://releases.jfrog.io/artifactory/jfrog-cli/v1/7.78/jfrog-cli-linux-amd64/jfrog && chmod +x jfrog && sudo mv jfrog /usr/local/bin'
+			     }
+		     }
+		  }
 		  stage('push docker image to artifactory'){
                             steps{
 				script{
