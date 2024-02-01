@@ -79,7 +79,6 @@ pipeline {
 					 env.DOCKER_IMAGE_NAME = DOCKER_IMAGE_NAME
 					 env.DOCKER_TAG = DOCKER_TAG
 					 env.DOCKER_REPO = DOCKER_REPO
-					 env.ARTIFACTORY_CREDS = creds
 					 sh "echo "$ARTIFACTORY_CREDS" | jfrog rt config --url $ARTIFACTORY_URL --interactive=false"
 					 sh "jfrog rt docker-push $DOCKER_IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO"
 				      }
