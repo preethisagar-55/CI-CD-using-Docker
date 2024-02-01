@@ -85,6 +85,7 @@ pipeline {
 				script {
 					  def artifactUrl = "${ARTIFACTORY_URL}/${REPO_NAME}/${ARTIFACT_PATH}/$ {ARTIFACT_FILE}"
 					  def curlCmd = "curl -uapikey:${API_KEY} -T ${ARTIFACT_FILE} ${artifactUrl}"
+					
 					  sh curlCmd
 																									  
 					}
