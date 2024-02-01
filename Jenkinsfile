@@ -80,7 +80,7 @@ pipeline {
                          steps {
 				  sh '''
                                   docker login preethisagar114376.jfrog.io -u preethi.sagar55@gmail.com -p ${ARTIFACTORY_CREDS_ID}
-				  docker push https://preethisagar114376.jfrog.io/java-web-app-docker/demoapp:$BUILD_NUMBER
+				  docker push preethisagar114376.jfrog.io/java-web-app-docker/demoapp:$BUILD_NUMBER
                                   '''
                              }
 
