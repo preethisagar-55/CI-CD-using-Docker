@@ -4,11 +4,16 @@ pipeline {
 		maven "maven 3.6.3"
 	}
 	environment {
-	    ARTIFACTORY_ACCESS_TOKEN = credentials("jfrogtoken")
+	   
 	    SONAR_AUTH_TOKEN = credentials('sonar')
-	    DOCKER_IMAGE_NAME = "https://hub.docker.com/layers/haripreethisagar/ciproject.${BUILD_ID}.${env.BUILD_NUMBER}"
-
-	}
+	    ARTIFACTORY_CREDS_ID=jfrog
+	    env.USERNAME = USERNAME
+	    env.PASSWORD = PASSWORD
+	    env.ARTIFACTORY_URL = https://preethisagar114376.jfrog.io/
+	    env.DOCKER_IMAGE_NAME= samplewebapp
+	    env.DOCKER_TAG = latest
+	    env.DOCKER_REPO = dockerdemo 
+ }
 
 	stages {
 		stage('checkout') {
@@ -70,9 +75,9 @@ pipeline {
 		  stage('push docker image to artifactory'){
                             steps{
 				script{
-					 withCredentials([usernamePassword(credentialsId:"jfrog",usernameVariable:'USERNAME',passwordVariable:'PASSWORD')]){
-					 sh "jfrog rt config --url https://preethisagar114376.jfrog.io/ --user ${USERNAME} --password ${PASSWORD}"
-					 sh "jfrog rt docker-push samplewebapp:latest dockerdemo"
+					 withCredentials([usernamePassword(credentialsId:"${ARTIFACTORY_CREDS_ID}",usernameVariable:'USERNAME',passwordVariable:'PASSWORD')]){
+					 sh "jfrog rt config --url $ARTIFACTORY_URL --user $USERNAME --password $PASSWORD"
+					 sh "jfrog rt $DOCKER_IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO"
 				      }
 				}
 			}
