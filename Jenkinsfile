@@ -4,9 +4,8 @@ pipeline {
 		maven "maven 3.6.3"
 	}
 	environment {
-	    ARTIFACTORY_ACCESS_TOKEN = credentials("jfrog")
+	    ARTIFACTORY_ACCESS_TOKEN = credentials("jfrogtoken")
 	    SONAR_AUTH_TOKEN = credentials('sonar')
-	    JFROG_CLI_BUILD_URL= 'https://preethisagar114376.jfrog.io/artifactory'
 	    DOCKER_IMAGE_NAME = "https://hub.docker.com/layers/haripreethisagar/ciproject.${BUILD_ID}.${env.BUILD_NUMBER}"
 
 	}
@@ -68,16 +67,16 @@ pipeline {
                                 //}
                              //}
 		       //}   
-		 stage('Pushing Docker Image to Jfrog Artifactory') {
+		  stage('Pushing Docker Image to Jfrog Artifactory') {
                             steps {
-                                    script {
-                                               docker.withRegistry('https://preethisagar114376.jfrog.io/', 'jfrogtoken') {
-                                               docker.image("dockerdemo/docker:${TAG}").push()
-                                               docker.image("dockerdemo/docker:${TAG}").push("latest")
-                    }
-                }
-            }
-        }
+                                script {
+                                         docker.withRegistry('https://preethisagar114376.jfrog.io', '${ARTIFACTORY_ACCESS_TOKEN}+') {
+                                         docker.image("dockerdemo/docker:${TAG}").push()
+                                         docker.image("dockerdemo/docker:${TAG}").push("latest")
+                                  }
+                               }
+                           }
+                        }
 
 //stage('Run Docker container on Jenkins Agent') {
 
