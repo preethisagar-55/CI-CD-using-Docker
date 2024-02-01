@@ -4,14 +4,14 @@ pipeline {
 		maven "maven 3.6.3"
 	}
 	environment {
-	   SONAR_AUTH_TOKEN = credentials('sonar')
+	    SONAR_AUTH_TOKEN = credentials('sonar')
 	    ARTIFACTORY_CREDS_ID='jfrog'
 	    env.USERNAME = 'USERNAME'
 	    env.PASSWORD = 'PASSWORD'
-	    env.ARTIFACTORY_URL = 'preethisagar114376.jfrog.io'
-	    env.DOCKER_IMAGE_NAME= 'samplewebapp'
-	    env.DOCKER_TAG = 'latest'
-	    env.DOCKER_REPO = 'dockerdemo' 
+	    ARTIFACTORY_URL = 'preethisagar114376.jfrog.io'
+	    DOCKER_IMAGE_NAME= 'samplewebapp'
+	    DOCKER_TAG = 'latest'
+	    DOCKER_REPO = 'dockerdemo' 
         }
 	stages {
 		stage('checkout') {
@@ -74,6 +74,12 @@ pipeline {
                             steps{
 				script{
 					 withCredentials([usernamePassword(credentialsId:"${ARTIFACTORY_CREDS_ID}",usernameVariable:'USERNAME',passwordVariable:'PASSWORD')]){
+					 env.USERNAME = USERNAME
+					 env.PASSWORD = PASSWORD
+					 env.ARTIFACTORY_URL = ARTIFACTORY_URL
+					 env.DOCKER_IMAGE_NAME = DOCKER_IMAGE_NAME
+					 env.DOCKER_TAG = DOCKER_TAG
+					 env.DOCKER_REPO = DOCKER_REPO
 					 sh "jfrog rt config --url $ARTIFACTORY_URL --user $USERNAME --password $PASSWORD"
 					 sh "jfrog rt $DOCKER_IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO"
 				      }
