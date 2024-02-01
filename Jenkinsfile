@@ -6,7 +6,7 @@ pipeline {
 	environment {
 	    ARTIFACTORY_ACCESS_TOKEN = credentials("jfrog")
 	    SONAR_AUTH_TOKEN = credentials('sonar')
-	    JFROG_URL= 'https://preethisagar114376.jfrog.io/artifactory'
+	    JFROG_CLI_BUILD_URL= 'https://preethisagar114376.jfrog.io/artifactory'
 	    DOCKER_IMAGE_NAME = "https://hub.docker.com/layers/haripreethisagar/ciproject.${BUILD_ID}.${env.BUILD_NUMBER}"
 
 	}
@@ -30,7 +30,7 @@ pipeline {
                          steps {
                                  //sh 'curl -fL https://getcli.jfrog.io | sh'
 				 //sh 'echo ${ARTIFACTORY_ACCESS_TOKEN}'
-                                 sh './jfrog rt u --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  maven-demo/'
+                                 sh './jfrog rt u --url ${JFROG_CLI_BUILD_URL} --access-token ${ARTIFACTORY_ACCESS_TOKEN} ./*.jar  maven-demo/'
                                  jf 'rt build-publish'
                                  //  sh  './jfrog rt bp  --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ${JOB_NAME} ${BUILD_NUMBER}'
                                 }
