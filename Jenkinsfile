@@ -59,6 +59,12 @@ pipeline {
 		//stage('Trivy Scan') {
 			 //steps {
 				 //sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER  --output report.html || true'
+		                   sh 'trivy -h'
+                                   sh 'mkdir -p reports'
+                                   sh 'sudo apt-get -y install tree'
+                                   sh 'trivy image $DOCKER_IMAGE_NAME  --output report.html || true'
+                                   sh 'tree'
+                                   sh 'ls -lrth'
 			 //}
 		     //}
 
