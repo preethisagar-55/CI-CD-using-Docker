@@ -8,8 +8,8 @@ pipeline {
 	    ARTIFACTORY_CREDS_ID='jfrogtoken'
 	    API_KEY = credentials('jfrogAPI')
 	    REPO_NAME = 'dockerdemo'
-	    ARTIFACT_PATH = docker-demo/samplewebapp
-	    ARTIFACT_FILE = samplewebapp
+	    ARTIFACT_PATH = 'docker-demo/samplewebapp'
+	    ARTIFACT_FILE = 'samplewebapp'
 	    //env.USERNAME = 'USERNAME'
 	    //env.PASSWORD = 'PASSWORD'
 	    ARTIFACTORY_URL = 'https://preethisagar114376.jfrog.io'
