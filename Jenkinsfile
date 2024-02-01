@@ -5,9 +5,9 @@ pipeline {
 	}
 	environment {
 	    SONAR_AUTH_TOKEN = credentials('sonar')
-	    ARTIFACTORY_CREDS_ID='jfrog'
-	    env.USERNAME = 'USERNAME'
-	    env.PASSWORD = 'PASSWORD'
+	    ARTIFACTORY_CREDS_ID='jfrogtoken'
+	    //env.USERNAME = 'USERNAME'
+	    //env.PASSWORD = 'PASSWORD'
 	    ARTIFACTORY_URL = 'preethisagar114376.jfrog.io'
 	    DOCKER_IMAGE_NAME= 'samplewebapp'
 	    DOCKER_TAG = 'latest'
@@ -73,14 +73,14 @@ pipeline {
 		  stage('push docker image to artifactory'){
                             steps{
 				script{
-					 withCredentials([usernamePassword(credentialsId:"${ARTIFACTORY_CREDS_ID}",usernameVariable:'USERNAME',passwordVariable:'PASSWORD')]){
-					 env.USERNAME = USERNAME
-					 env.PASSWORD = PASSWORD
+					 withCredentials([usernamePassword(credentialsId:"${ARTIFACTORY_CREDS_ID}")]){
+					 //env.USERNAME = USERNAME
+					 //env.PASSWORD = PASSWORD
 					 env.ARTIFACTORY_URL = ARTIFACTORY_URL
 					 env.DOCKER_IMAGE_NAME = DOCKER_IMAGE_NAME
 					 env.DOCKER_TAG = DOCKER_TAG
 					 env.DOCKER_REPO = DOCKER_REPO
-					 sh "jfrog rt config --url $ARTIFACTORY_URL --user $USERNAME --password $PASSWORD"
+					 sh "jfrog rt config --url $ARTIFACTORY_URL --access-token $ARTIFACTORY_CREDS_ID"
 					 sh "jfrog rt $DOCKER_IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO"
 				      }
 				}
