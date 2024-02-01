@@ -71,7 +71,7 @@ pipeline {
 		 stage('Pushing Docker Image to Jfrog Artifactory') {
                             steps {
                                     script {
-                                               docker.withRegistry('https://preethisagar114376.jfrog.io/', 'jfrog') {
+                                               docker.withRegistry('https://preethisagar114376.jfrog.io/', 'jfrogtoken') {
                                                docker.image("dockerdemo/docker:${TAG}").push()
                                                docker.image("dockerdemo/docker:${TAG}").push("latest")
                     }
