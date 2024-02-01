@@ -70,7 +70,7 @@ pipeline {
 		  stage('push docker image to artifactory'){
                             steps{
 				script{
-					 withCredentials([usernamePassword(credentialsId:"jfrogtoken",usernameVariable:'USERNAME',passwordVariable:'PASSWORD')]){
+					 withCredentials([usernamePassword(credentialsId:"jfrog",usernameVariable:'USERNAME',passwordVariable:'PASSWORD')]){
 					 sh "jfrog rt config --url https://preethisagar114376.jfrog.io/ --user ${USERNAME} --password ${PASSWORD}"
 					 sh "jfrog rt docker-push samplewebapp:latest dockerdemo"
 				      }
