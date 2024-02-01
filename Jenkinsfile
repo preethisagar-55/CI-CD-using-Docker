@@ -78,11 +78,8 @@ pipeline {
 		       //}   
 		  stage('Push docker image to artifactory') {
                          steps {
-				 sh '''
-                                 docker login preethisagar114376.jfrog.io -u preethi.sagar55@gmail.com -p ${ARTIFACTORY_CREDS_ID}
-				 docker push  preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER
-                                 '''
-                             }
+				 sh 'jf rt upload --url ${ARTIFACTORY_URL} --access token ${ARTIFACTORY_CREDS_ID} docker-demo/samplewebapp:$BUILD_NUMBER'
+			       }
 
 //stage('Run Docker container on Jenkins Agent') {
 
