@@ -6,6 +6,10 @@ pipeline {
 	environment {
 	    SONAR_AUTH_TOKEN = credentials('sonar')
 	    ARTIFACTORY_CREDS_ID='jfrogtoken'
+	    API_KEY = credentials('jfrogAPI')
+	    REPO_NAME = 'dockerdemo'
+	    ARTIFACT_PATH = docker-demo/samplewebapp
+	    ARTIFACT_FILE = samplewebapp
 	    //env.USERNAME = 'USERNAME'
 	    //env.PASSWORD = 'PASSWORD'
 	    ARTIFACTORY_URL = 'https://preethisagar114376.jfrog.io'
@@ -75,12 +79,19 @@ pipeline {
                                     //sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
                                 //}
                              //}
-		       //}   
-		  stage('Push docker image to artifactory') {
-                         steps {
-				 sh 'curl -fL https://getcli.jfrog.io | sh'
-				 sh 'jf rt upload --url ${ARTIFACTORY_URL} --access token ${ARTIFACTORY_CREDS_ID} docker-demo/samplewebapp:$BUILD_NUMBER'
-			       }
+		       //}  
+                 stage('push artifact to artifactory') {
+	                     steps {
+				script {
+					  def artifactUrl = "${ARTIFACTORY_URL}/${REPO_NAME]/${ARTIFACT_PATH}/$ {ARTIFACT_FILE}"
+					  def curlCmd = "curl -uapikey:${API_KEY} -T ${ARTIFACT_FILE} ${artifactUrl}"
+					  sh curlCmd
+																									  
+					}
+				      }
+				   }
+				}
+			     }
 
 //stage('Run Docker container on Jenkins Agent') {
 
