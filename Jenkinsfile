@@ -7,7 +7,7 @@ pipeline {
 	    ARTIFACTORY_ACCESS_TOKEN = credentials("jfrog")
 	    SONAR_AUTH_TOKEN = credentials('sonar')
 	    JFROG_URL= 'https://preethisagar114376.jfrog.io/artifactory'
-	    DOCKER_IMAGE_NAME = "slk.jfrog.io/fis-demo-dockerhub/app-image.${BUILD_ID}.${env.BUILD_NUMBER}"
+	    DOCKER_IMAGE_NAME = "https://hub.docker.com/layers/haripreethisagar/ciproject.${BUILD_ID}.${env.BUILD_NUMBER}"
 
 	}
 
