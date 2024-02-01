@@ -67,7 +67,7 @@ pipeline {
                                 //}
                              //}
 		       //}   
-		  stage('push docker image to artifactory){
+		  stage('push docker image to artifactory'){
                             steps{
 				script{
 					 withCredentials([usernamePassword(credentialsId:"jfrogtoken",usernameVariable:'USERNAME',passwordVariable:'PASSWORD')]){
