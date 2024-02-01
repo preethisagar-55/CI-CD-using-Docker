@@ -4,18 +4,15 @@ pipeline {
 		maven "maven 3.6.3"
 	}
 	environment {
-	   
-	    SONAR_AUTH_TOKEN = credentials('sonar')
+	   SONAR_AUTH_TOKEN = credentials('sonar')
 	    ARTIFACTORY_CREDS_ID=jfrog
 	    env.USERNAME = USERNAME
 	    env.PASSWORD = PASSWORD
-	    env.ARTIFACTORY_URL = https://preethisagar114376.jfrog.io
+	    env.ARTIFACTORY_URL = preethisagar114376.jfrog.io
 	    env.DOCKER_IMAGE_NAME= samplewebapp
 	    env.DOCKER_TAG = latest
 	    env.DOCKER_REPO = dockerdemo 
- }
-}
-
+        }
 	stages {
 		stage('checkout') {
 			steps {
