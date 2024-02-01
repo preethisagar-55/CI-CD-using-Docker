@@ -80,7 +80,7 @@ pipeline {
 					 env.DOCKER_TAG = DOCKER_TAG
 					 env.DOCKER_REPO = DOCKER_REPO
 					 //env.ARTIFACTORY_CREDS = ARTIFACTORY_CREDS
-					 sh 'curl -fL https://getcli.jfrog.io | sh'
+					 //sh 'curl -fL https://getcli.jfrog.io | sh'
 					 sh "jfrog rt config --url $ARTIFACTORY_URL --interactive=false"
 					 sh "jfrog rt docker-push $DOCKER_IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO"
 				      }
