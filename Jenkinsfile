@@ -71,7 +71,7 @@ pipeline {
                             steps{
 				script{
 					 withCredentials([usernamePassword(credentialsId:"jfrogtoken",usernameVariable:'USERNAME',passwordVariable:'PASSWORD')]){
-					 sh "jfrog rt config --url https://preethisagar114376.jfrog.io/ --user ${USERNAME} --password $ {PASSWORD}"
+					 sh "jfrog rt config --url https://preethisagar114376.jfrog.io/ --user ${USERNAME} --password ${PASSWORD}"
 					 sh "jfrog rt docker-push samplewebapp:latest dockerdemo"
 				      }
 				}
