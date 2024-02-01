@@ -70,7 +70,7 @@ pipeline {
 		  stage('Pushing Docker Image to Jfrog Artifactory') {
                             steps {
                                 script {
-                                         docker.withRegistry('https://preethisagar114376.jfrog.io', '${ARTIFACTORY_ACCESS_TOKEN}+') {
+                                         docker.withRegistry('https://preethisagar114376.jfrog.io', '${ARTIFACTORY_ACCESS_TOKEN}') {
                                          docker.image("dockerdemo/docker:${TAG}").push()
                                          docker.image("dockerdemo/docker:${TAG}").push("latest")
                                   }
