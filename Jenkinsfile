@@ -76,25 +76,14 @@ pipeline {
                                 //}
                              //}
 		       //}   
-		  stage('push docker image to artifactory'){
-                            steps{
-				script{
-					 withCredentials([string(credentialsId:"${ARTIFACTORY_CREDS_ID}",variable:'ARTIFACTORY_CREDS')]){
-						                                 //def creds = sh(script:'echo $CREDENTIALS',returnStdout: true).trim()
-					 env.ARTIFACTORY_URL = ARTIFACTORY_URL
-					 env.DOCKER_IMAGE_NAME = DOCKER_IMAGE_NAME
-					 env.DOCKER_TAG = DOCKER_TAG
-					 env.DOCKER_REPO = DOCKER_REPO
-					 //env.ARTIFACTORY_CREDS = ARTIFACTORY_CREDS
-					 //sh 'curl -fL https://getcli.jfrog.io | sh'
-					 sh "jfrog rt config --url $ARTIFACTORY_URL --interactive=false"
-					 sh "jfrog rt docker-push $DOCKER_IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO"
-				      }
-				}
-			}
-		}
-	}
-}
+		  stage('Push artifacts into artifactory') {
+                         steps {
+				  withCredentials([ credentialsId: "jfrogtoken", url: "https://preethisagar114376.jfrog.io"]) {
+				  sh  'docker login -upreethi.sagar55@gmail.com preethisagar114376.jfrog.io'
+				  sh  'docker tag <IMAGE_ID> preethisagar114376.jfrog.io/docker-demo/haripreethisagar/ciproject:$BUILD_NUMBER'
+                                  sh  'docker push preethisagar114376.jfrog.io/docker-demo/preethisagar114376.jfrog.io/docker-demo/haripreethisagar/ciproject:$BUILD_NUMBER'
+                               }
+                             }
 
 //stage('Run Docker container on Jenkins Agent') {
 
