@@ -60,14 +60,14 @@ pipeline {
 			 }
 		     }
 
-                 stage('Publish image to Docker Hub') {
+                stage('Publish image to Docker Hub') {
                           steps {
                                     withDockerRegistry([ credentialsId: "docker", url: "" ]) {
                                     sh  'docker push haripreethisagar/ciproject:latest'
                                     sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
                                 }
                              }
-		 stage('Push artifacts into artifactory') {
+		stage('Push artifacts into artifactory') {
                           steps {
 				   sh  'docker login -upreethi.sagar55@gmail.com preethisagar114376.jfrog.io'
 				   sh  'docker tag <IMAGE_ID> preethisagar114376.jfrog.io/docker-demo/<DOCKER_IMAGE>:<DOCKER_TAG>'
