@@ -5,7 +5,7 @@ pipeline {
 	}
 	environment {
 	    SONAR_AUTH_TOKEN = credentials('sonar')
-	    ARTIFACTORY_CREDS_ID='jfrog'
+	    ARTIFACTORY_CREDS_ID='jfrogtoken'
 	    //env.USERNAME = 'USERNAME'
 	    //env.PASSWORD = 'PASSWORD'
 	    ARTIFACTORY_URL = 'preethisagar114376.jfrog.io'
