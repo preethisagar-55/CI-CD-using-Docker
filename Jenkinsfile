@@ -8,7 +8,7 @@ pipeline {
 	    ARTIFACTORY_CREDS_ID='jfrogtoken'
 	    //env.USERNAME = 'USERNAME'
 	    //env.PASSWORD = 'PASSWORD'
-	    ARTIFACTORY_URL = 'preethisagar114376.jfrog.io'
+	    ARTIFACTORY_URL = 'https://preethisagar114376.jfrog.io'
 	    DOCKER_IMAGE_NAME= 'samplewebapp'
 	    DOCKER_TAG = 'latest'
 	    DOCKER_REPO = 'dockerdemo' 
