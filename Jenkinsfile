@@ -56,7 +56,7 @@ pipeline {
 	                   }
 		stage('Trivy Scan') {
 			 steps {
-				 sh 'trivy image $DOCKER_IMAGE_NAME  --output report.html || true'
+				 sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER  --output report.html || true'
 			 }
 		     }
 
