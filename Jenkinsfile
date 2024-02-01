@@ -78,7 +78,7 @@ pipeline {
 		       //}   
 		  stage('Push artifacts into artifactory') {
                          steps {
-				  withCredentials([ credentialsId: "jfrogtoken", url: "https://preethisagar114376.jfrog.io"]) {
+				  withCredentials([string(credentialsId: "jfrogtoken", url: "https://preethisagar114376.jfrog.io")]) {
 				  sh  'docker login -upreethi.sagar55@gmail.com preethisagar114376.jfrog.io'
 				  sh  'docker tag <IMAGE_ID> preethisagar114376.jfrog.io/docker-demo/haripreethisagar/ciproject:$BUILD_NUMBER'
                                   sh  'docker push preethisagar114376.jfrog.io/docker-demo/preethisagar114376.jfrog.io/docker-demo/haripreethisagar/ciproject:$BUILD_NUMBER'
