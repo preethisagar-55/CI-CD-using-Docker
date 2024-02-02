@@ -98,30 +98,30 @@ pipeline {
                                 //}
                              //}
 		       //}  
-		  //stage('push image to jfrog artifactory'){
-			  //steps {
-			     //script {
-				       //sh 'docker login https://preethisagar114376.jfrog.io -u preethi.sagar55@gmail.com -p ${ARTIFACTORY_CREDS_ID}'
+		  stage('push image to jfrog artifactory'){
+			  steps {
+			     script {
+				       sh 'docker login preethisagar114376.jfrog.io -u preethi.sagar55@gmail.com -p ${ARTIFACTORY_CREDS_ID}'
 				       //sh 'docker tag samplewebapp preethisagar114376.jfrog.io/docker-demo/samplewebapp:latest' 
-				       //sh 'docker push preethisagar114376.jfrog.io/docker-demo/samplewebapp:latest'
+				       sh 'docker push preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER'
 			     //}
 			  //}
 		  //}
-                 stage('upload') {
-	                 steps {
-			   rtUpload(
-			     serverId: "artifactory",
-			     spec: '''{
-	                       "files": [
-			         {
-	                           "pattern": "preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER",
-			           "target" : "docker-demo/"
-	                         }
-			       ]
-	                      }''',
-			     )
-			   }
-			 }
+                 //stage('upload') {
+	                 //steps {
+			   //rtUpload(
+			     //serverId: "artifactory",
+			     //spec: '''{
+	                       //"files": [
+			         //{
+	                           //"pattern": "preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER",
+			           //"target" : "docker-demo/"
+	                         //}
+			       //]
+	                      //}''',
+			     //)
+			   //}
+			 //}
 		   stage('publish build info'){
 		         steps{
 		            rtPublishBuildInfo(
