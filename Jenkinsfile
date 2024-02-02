@@ -41,16 +41,16 @@ pipeline {
                                  //  sh  './jfrog rt bp  --url https://preethisagar114376.jfrog.io/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} ${JOB_NAME} ${BUILD_NUMBER}'
                                 //}
                              //}
-		stage('Static Code Analysis') {
-		       environment {
-		             SONAR_URL = "http://3.109.212.222:9000"
-		        }
-		           steps {
-		                 withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
-		                 sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-		              }
-		          }
-		      }
+		//stage('Static Code Analysis') {
+		       //environment {
+		             //SONAR_URL = "http://3.109.212.222:9000"
+		        //}
+		           //steps {
+		                 //withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
+		                 //sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+		              //}
+		          //}
+		      //}
 
 	          stage('Docker Build and Tag') {
 		            steps {
@@ -80,13 +80,28 @@ pipeline {
                                 //}
                              //}
 		       //}  
-                 //stage('push artifact to artifactory') {
-	                     //steps {
-				//script {
-					  //def artifactUrl = "${ARTIFACTORY_URL}/${REPO_NAME}/${ARTIFACT_PATH}/${ARTIFACT_FILE}"
-					  //def curlCmd = "curl -uapikey:${API_KEY} -T ${ARTIFACT_FILE} ${artifactUrl}"
-					
-					  //sh curlCmd
+                 stage('upload') {
+	                 steps {
+			   rtUpload{
+			     serverId:"artifactory",
+			     spec: '''{
+	                       "files": [
+			         {
+	                           "pattern": "samplewebapp:latest":
+			           "target" : "docker-demo/"
+	                         }
+			       ]
+	                      }''',
+			     )
+			   }
+			 }
+		   stage('publish build info')
+		     steps{
+		       rtPublishBuildInfo(
+			 serverId: "artifactory"
+			)
+		     }
+		   }
 																									  
 					//}
 				      //}
