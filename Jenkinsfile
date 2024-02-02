@@ -107,7 +107,7 @@ pipeline {
 			     //}
 			  //}
 		  //}
-                 stage('upload') {
+                 stage('Push Image to Artifactory') {
 	                 steps {
 			   rtDockerPush(
 			     serverId: "artifactory",
