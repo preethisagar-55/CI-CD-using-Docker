@@ -20,7 +20,7 @@ pipeline {
 	stages {
 		stage('checkout') {
 			steps {
-                                timeout(time:5,unit:'MINUTES'){
+                                timeout(time:10,unit:'MINUTES'){
 				git branch: 'master', credentialsId: 'git', url: 'https://github.com/preethisagar-55/CI-CD-using-Docker.git'
 				}
                            }
