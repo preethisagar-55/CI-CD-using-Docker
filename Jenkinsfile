@@ -69,7 +69,7 @@ pipeline {
 
 	          stage('Docker Build and Tag') {
 		            steps {
-			          sh 'docker build -t preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER --pull=true .'
+			          sh 'docker build -t preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER} --pull=true .'
 				  sh 'docker images'
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:latest'
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:$BUILD_NUMBER'
@@ -111,7 +111,7 @@ pipeline {
 	                 steps {
 			   rtDockerPush(
 			     serverId: "artifactory",
-			     image: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER",
+			     image: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
 			     targetRepo: 'docker-demo',
 			     properties: 'project-name=example; status=stale')
 			 }
