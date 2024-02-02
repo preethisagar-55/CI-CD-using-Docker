@@ -69,9 +69,9 @@ pipeline {
 
 	          stage('Docker Build and Tag') {
 		            steps {
-			          sh 'docker build -t samplewebapp:latest .'
-				  sh 'docker tag samplewebapp docker-demo/demoapp:latest'
-				  sh 'docker tag samplewebapp docker-demo/demoapp:$BUILD_NUMBER'
+			          sh 'docker build -t samplewebapp .'
+				  sh 'docker tag samplewebapp preethisagar114376.jfrog.io/docker-demo/samplewebapp:latest'
+				  sh 'docker tag samplewebapp preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER'
 			          //sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
 			          //sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
 
@@ -97,21 +97,28 @@ pipeline {
                                 //}
                              //}
 		       //}  
-                 stage('upload') {
-	                 steps {
-			   rtUpload(
-			     serverId: "artifactory",
-			     spec: '''{
-	                       "files": [
-			         {
-	                           "pattern": "docker-demo/demoapp:latest",
-			           "target" : "docker-demo/"
-	                         }
-			       ]
-	                      }''',
-			     )
-			   }
-			 }
+		  stage('push image to jfrog artifactory'){
+			  steps {
+			     script {
+				       sh 'docker push samplewebapp preethisagar114376.jfrog.io/docker-demo/samplewebapp:latest'
+			     }
+			  }
+		  }
+                 //stage('upload') {
+	                 //steps {
+			   //rtUpload(
+			     //serverId: "artifactory",
+			     //spec: '''{
+	                       //"files": [
+			         //{
+	                           //"pattern": "docker-demo/demoapp:latest",
+			           //"target" : "docker-demo/"
+	                         //}
+			       //]
+	                      //}''',
+			     //)
+			   //}
+			 //}
 		   stage('publish build info'){
 		         steps{
 		            rtPublishBuildInfo(
