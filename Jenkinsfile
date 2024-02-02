@@ -69,7 +69,8 @@ pipeline {
 
 	          stage('Docker Build and Tag') {
 		            steps {
-			          sh 'docker build -t samplewebapp .'
+			          sh 'docker build -t preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER --pull=true .'
+				  sh 'docker images'
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:latest'
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:$BUILD_NUMBER'
 			          //sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
@@ -113,7 +114,7 @@ pipeline {
 			     spec: '''{
 	                       "files": [
 			         {
-	                           "pattern": "samplewebapp",
+	                           "pattern": "preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER",
 			           "target" : "docker-demo/"
 	                         }
 			       ]
