@@ -32,6 +32,28 @@ pipeline {
 				sh 'mvn package'
 			}
 		}
+		stage('upload') {
+	                 steps {
+			   rtUpload(
+			     serverId: "artifactory",
+			     spec: '''{
+	                       "files": [
+			         {
+	                           "pattern": "*.war",
+			           "target" : "maven-demo/"
+	                         }
+			       ]
+	                      }''',
+			     )
+			   }
+			 }
+		   stage('publish build info'){
+		         steps{
+		            rtPublishBuildInfo(
+			        serverId: "artifactory"
+			)
+		     }
+		   }
 		//stage('Push artifacts into artifactory') {
                          //steps {
                                  //sh 'curl -fL https://getcli.jfrog.io | sh'
