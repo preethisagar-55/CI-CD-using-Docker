@@ -87,7 +87,7 @@ pipeline {
 			     spec: '''{
 	                       "files": [
 			         {
-	                           "pattern": "samplewebapp",
+	                           "pattern": "samplewebapp:latest",
 			           "target" : "docker-demo/"
 	                         }
 			       ]
