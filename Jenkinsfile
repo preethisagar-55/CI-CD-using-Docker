@@ -42,18 +42,18 @@ pipeline {
                                 //}
                              //}
 		stage('Static Code Analysis') {
-		  environment {
-		    SONAR_URL = "http://3.109.212.222:9000"
-		  }
-		        steps {
+		       environment {
+		             SONAR_URL = "http://3.109.212.222:9000"
+		        }
+		           steps {
 		                 withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
 		                 sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
 		              }
 		          }
 		      }
 
-	        stage('Docker Build and Tag') {
-		         steps {
+	          stage('Docker Build and Tag') {
+		            steps {
 			          sh 'docker build -t samplewebapp:latest .'
 			          sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
 			          sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
