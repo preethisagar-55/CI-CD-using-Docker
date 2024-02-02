@@ -2,6 +2,7 @@ pipeline {
 	agent any
 	tools {
 		maven "maven 3.6.3"
+		jfrog "jfrogcli"
 	}
 	environment {
 	    SONAR_AUTH_TOKEN = credentials('sonar')
@@ -98,24 +99,24 @@ pipeline {
                                 //}
                              //}
 		       //}  
-		  stage('push image to jfrog artifactory'){
-			  steps {
-			     script {
-				       sh 'docker login ${ARTIFACTORY_URL} -u admin -p ${ARTIFACTORY_CREDS_ID}'
+		  //stage('push image to jfrog artifactory'){
+			  //steps {
+			     //script {
+				       //sh 'docker login ${ARTIFACTORY_URL} -u admin -p ${ARTIFACTORY_CREDS_ID}'
 				       //sh 'docker tag samplewebapp preethisagar114376.jfrog.io/docker-demo/samplewebapp:latest' 
-				       sh 'docker push https://preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER'
-			     }
-			  }
-		  }
-                 //stage('Push Image to Artifactory') {
-	                 //steps {
-			   //rtDockerPush(
-			     //serverId: "artifactory",
-			     //dockerImage: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
-			     //targetRepo: 'docker-demo')
-			 //}
-	                //}
-			 //}
+				       //sh 'docker push https://preethisagar114376.jfrog.io/docker-demo/samplewebapp:$BUILD_NUMBER'
+			     //}
+			  //}
+		  //}
+                 stage('Push Image to Artifactory') {
+	                 steps {
+			   rtDockerPush(
+			     serverId: "artifactory",
+			     dockerImage: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
+			     targetRepo: 'docker-demo')
+			 }
+	                }
+			 }
 		  // stage('publish build info'){
 		         //steps{
 		           // rtPublishBuildInfo(
