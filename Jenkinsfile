@@ -32,7 +32,7 @@ pipeline {
 				sh 'mvn package'
 			}
 		}
-		stage('upload') {
+		stage('upload maven artifact to jfrog') {
 	                 steps {
 			   rtUpload(
 			     serverId: "artifactory",
