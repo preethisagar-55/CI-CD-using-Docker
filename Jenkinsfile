@@ -47,13 +47,6 @@ pipeline {
 			     )
 			   }
 			 }
-		   stage('publish build info'){
-		         steps{
-		            rtPublishBuildInfo(
-			        serverId: "artifactory"
-			)
-		     }
-		   }
 		//stage('Push artifacts into artifactory') {
                          //steps {
                                  //sh 'curl -fL https://getcli.jfrog.io | sh'
