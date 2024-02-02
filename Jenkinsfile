@@ -32,21 +32,21 @@ pipeline {
 				sh 'mvn package'
 			}
 		}
-		stage('upload maven artifact to jfrog') {
-	                 steps {
-			   rtUpload(
-			     serverId: "artifactory",
-			     spec: '''{
-	                       "files": [
-			         {
-	                           "pattern": "*.war",
-			           "target" : "maven-demo/"
-	                         }
-			       ]
-	                      }''',
-			     )
-			   }
-			 }
+		//stage('upload maven artifact to jfrog') {
+	                 //steps {
+			   //rtUpload(
+			     //serverId: "artifactory",
+			     //spec: '''{
+	                       //"files": [
+			         //{
+	                           //"pattern": "*.war",
+			           //"target" : "maven-demo/"
+	                         //}
+			       //]
+	                      //}''',
+			     //)
+			   //}
+			 //}
 		//stage('Push artifacts into artifactory') {
                          //steps {
                                  //sh 'curl -fL https://getcli.jfrog.io | sh'
@@ -70,8 +70,10 @@ pipeline {
 	          stage('Docker Build and Tag') {
 		            steps {
 			          sh 'docker build -t samplewebapp:latest .'
-			          sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
-			          sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
+				  sh 'docker tag samplewebapp docker-demo/demoapp:latest'
+				  sh 'docker tag samplewebapp docker-demo/demoapp:$BUILD_NUMBER'
+			          //sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
+			          //sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
 
 		               }
 	                   }
@@ -102,7 +104,7 @@ pipeline {
 			     spec: '''{
 	                       "files": [
 			         {
-	                           "pattern": "samplewebapp:latest",
+	                           "pattern": "docker-demo/demoapp:latest",
 			           "target" : "docker-demo/"
 	                         }
 			       ]
