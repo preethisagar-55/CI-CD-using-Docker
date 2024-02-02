@@ -95,10 +95,10 @@ pipeline {
 			     )
 			   }
 			 }
-		   stage('publish build info')
-		     steps{
-		       rtPublishBuildInfo(
-			 serverId: "artifactory"
+		   stage('publish build info'){
+		         steps{
+		            rtPublishBuildInfo(
+			        serverId: "artifactory"
 			)
 		     }
 		   }
