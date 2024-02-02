@@ -100,7 +100,7 @@ pipeline {
 		  stage('push image to jfrog artifactory'){
 			  steps {
 			     script {
-				       sh 'docker push samplewebapp preethisagar114376.jfrog.io/docker-demo/samplewebapp:latest'
+				       sh 'docker push preethisagar114376.jfrog.io/docker-demo/samplewebapp:latest'
 			     }
 			  }
 		  }
