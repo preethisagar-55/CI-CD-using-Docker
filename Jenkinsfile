@@ -111,9 +111,8 @@ pipeline {
 	                 steps {
 			   rtDockerPush(
 			     serverId: "artifactory",
-			     image: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
-			     targetRepo: 'docker-demo/',
-			     properties: 'project-name=example; status=stale')
+			     dockerImage: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
+			     targetRepo: 'docker-demo')
 			 }
 	                }
 			 }
