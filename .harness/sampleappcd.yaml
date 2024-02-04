@@ -26,7 +26,7 @@ pipeline:
             environmentRef: demoenv
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: demoinfra
+              - identifier: demoinfra1
           execution:
             steps:
               - step:
