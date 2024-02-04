@@ -1,0 +1,52 @@
+pipeline:
+  name: sampleapp-cd
+  identifier: sampleappcd
+  projectIdentifier: sampleappcd
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: helm-deploy
+        identifier: helmdeploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: NativeHelm
+          service:
+            serviceRef: demosvc
+            serviceInputs:
+              serviceDefinition:
+                type: NativeHelm
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: demoenv
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: demoinfra
+          execution:
+            steps:
+              - step:
+                  name: Helm Deployment
+                  identifier: helmDeployment
+                  type: HelmDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+            rollbackSteps:
+              - step:
+                  name: Helm Rollback
+                  identifier: helmRollback
+                  type: HelmRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
