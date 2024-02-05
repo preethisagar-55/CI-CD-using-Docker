@@ -19,7 +19,9 @@ pipeline:
                 type: NativeHelm
                 spec:
                   artifacts:
-                    primary: {}
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
           environment:
             environmentRef: demoenv
             deployToAll: false
