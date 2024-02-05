@@ -53,7 +53,7 @@ pipeline {
         stage('Publish image to Docker Hub') {
             steps {
                         withDockerRegistry([ credentialsId: "docker", url: "" ]) {
-                        sh  'docker push haripreethisagar/ciproject:latest'
+                        //sh  'docker push haripreethisagar/ciproject:latest'
                         sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
                                 }
                              }
