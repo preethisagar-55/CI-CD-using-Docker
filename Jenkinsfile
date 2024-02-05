@@ -47,7 +47,7 @@ pipeline {
 				      sh 'docker build -t samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER .'
 			    }
                              }
-	                   }
+	                   
 		
 
         stage('Publish image to Docker Hub') {
@@ -68,5 +68,6 @@ pipeline {
                    }
 
                     }
+}
 
 
