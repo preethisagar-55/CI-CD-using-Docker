@@ -77,8 +77,8 @@ pipeline {
 			          sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
 			          sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
 				  sh 'docker build -t samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER' --pull=true .'
-
-		               }
+			    }
+                             }
 	                   }
 		//stage('Trivy Scan') {
 			 //steps {
