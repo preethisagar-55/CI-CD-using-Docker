@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: "preethisagar114376.jfrog.io/docker-demo/samplewebapp"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "247"
 
 imagePullSecrets: []
 nameOverride: ""
