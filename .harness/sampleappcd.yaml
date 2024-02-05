@@ -54,3 +54,8 @@ pipeline:
           - demo-helm-delegate
         when:
           pipelineStatus: Success
+  properties:
+    ci:
+      codebase:
+        connectorRef: gitdemo
+        build: <+input>
