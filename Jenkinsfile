@@ -76,7 +76,7 @@ pipeline {
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:$BUILD_NUMBER'
 			          sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
 			          sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
-				  sh 'docker build -t samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER' --pull=true .'
+				  sh 'docker build -t samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER .'
 			    }
                              }
 	                   }
