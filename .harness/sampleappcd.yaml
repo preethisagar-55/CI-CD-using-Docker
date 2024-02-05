@@ -50,10 +50,10 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
-        delegateSelectors:
-          - demo-helm-delegate
         when:
           pipelineStatus: Success
+        delegateSelectors:
+          - helm-delegate
   properties:
     ci:
       codebase:
