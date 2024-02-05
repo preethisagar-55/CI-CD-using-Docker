@@ -67,6 +67,14 @@ pipeline {
 
                   }
                    }
+	stage('Push Image to Artifactory') {
+	                 steps {
+			   rtDockerPush(
+			     serverId: "artifactory",
+			     image: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
+			     targetRepo: 'docker-demo')
+			 }
+	                }
 
                     }
 }
