@@ -38,35 +38,35 @@ pipeline {
 
 	    stage('Docker Build and Tag') {
 		    steps {
-			          //sh 'docker build -t preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER} --pull=true .'
-				  //sh 'docker images'
+			          sh 'docker build -t preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER} --pull=true .'
+				  sh 'docker images'
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:latest'
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:$BUILD_NUMBER'
-			          sh 'docker build -t samplewebapp:$BUILD_NUMBER .'
-			          sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
-			          sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
+			          //sh 'docker build -t samplewebapp:$BUILD_NUMBER .'
+			          //sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
+			          //sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
 				     
 			    }
                              }
 	                   
 		
 
-        stage('Publish image to Docker Hub') {
-            steps {
-                        withDockerRegistry([ credentialsId: "docker", url: "" ]) {
+        //stage('Publish image to Docker Hub') {
+            //steps {
+                        //withDockerRegistry([ credentialsId: "docker", url: "" ]) {
                         //sh  'docker push haripreethisagar/ciproject:latest'
-                        sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
-                                }
-                             }
-		       }  
+                        //sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
+                                //}
+                             //}
+		       //}  
 		  
                  
-        stage('Run Docker container on Jenkins Agent') {
-            steps{
-                    sh "docker run -d -p 8003:8080 samplewebapp:${BUILD_NUMBER}"
+        //stage('Run Docker container on Jenkins Agent') {
+            //steps{
+                    //sh "docker run -d -p 8003:8080 samplewebapp:${BUILD_NUMBER}"
 
-                  }
-                   }
+                  //}
+                   //}
 	stage('Push Image to Artifactory') {
 	                 steps {
 			   rtDockerPush(
