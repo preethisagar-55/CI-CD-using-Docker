@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: preethisagar114376.jfrog.io/docker-demo/samplewebapp
-  pullPolicy: Always
+  repository: preethisagar114376.jfrog.io/docker-demo/samplewebapp:268
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "268"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -40,8 +40,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: NodePort
-  port: 8080
+  type: LoadBalancer
+  port: 80
 
 ingress:
   enabled: false
