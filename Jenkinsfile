@@ -108,22 +108,22 @@ pipeline {
 			     //}
 			  //}
 		  //}
-                 //stage('Push Image to Artifactory') {
-	                 //steps {
-			   //rtDockerPush(
-			     //serverId: "artifactory",
-			     //image: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
-			     //targetRepo: 'docker-demo')
-			 //}
-	                //}
+                 stage('Push Image to Artifactory') {
+	                 steps {
+			   rtDockerPush(
+			     serverId: "artifactory",
+			     image: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
+			     targetRepo: 'docker-demo')
 			 }
-		  // stage('publish build info'){
-		         //steps{
-		           // rtPublishBuildInfo(
-			       // serverId: "artifactory"
-			//)
-		    // }
-		   //}
+	                }
+			 }
+		   stage('publish build info'){
+		         steps{
+		            rtPublishBuildInfo(
+			        serverId: "artifactory"
+			)
+		     }
+		   }
 																									  
 					//}
 				      //}
@@ -131,14 +131,12 @@ pipeline {
 				//}
 			     //}
 
-//stage('Run Docker container on Jenkins Agent') {
+                   stage('Run Docker container on Jenkins Agent') {
+                         steps{
+                                sh "docker run -d -p 8003:8080 samplewebapp:${BUILD_NUMBER}"
 
-// steps 
-//{
-//  sh "docker run -d -p 8003:8080 nikhilnidhi/samplewebapp"
-
-//}
-//  }
+                                }
+                              }
 //stage('Run Docker container on remote hosts') {
 
 //steps {
