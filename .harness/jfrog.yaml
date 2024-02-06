@@ -1,0 +1,20 @@
+inputSet:
+  name: jfrog
+  identifier: jfrog
+  orgIdentifier: default
+  projectIdentifier: sampleappcd
+  pipeline:
+    identifier: sampleappcd
+    stages:
+      - stage:
+          identifier: helmdeploy
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: NativeHelm
+                  spec:
+                    artifacts:
+                      primary:
+                        primaryArtifactRef: jfrog
