@@ -5,7 +5,7 @@ pipeline {
 		jfrog "jfrogcli"
 	}
 	environment {
-	    SONAR_AUTH_TOKEN = credentials('sonar')
+	    //SONAR_AUTH_TOKEN = credentials('sonar')
 	    ARTIFACTORY_CREDS_ID='jfrogtoken'
 	    //API_KEY = credentials('jfrogAPI')
 	    REPO_NAME = 'dockerdemo'
