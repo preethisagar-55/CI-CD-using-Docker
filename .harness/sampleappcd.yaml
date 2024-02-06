@@ -54,8 +54,30 @@ pipeline:
           pipelineStatus: Success
         delegateSelectors:
           - helm-delegate
-  properties:
-    ci:
-      codebase:
-        connectorRef: gitdemo
-        build: <+input>
+    - stage:
+        name: approval
+        identifier: approval
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  name: demoapproval
+                  identifier: demoapproval
+                  type: HarnessApproval
+                  timeout: 1d
+                  spec:
+                    approvalMessage: |-
+                      Please review the following information
+                      and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                      userGroups:
+                        - demogroup
+                        - _project_all_users
+                    isAutoRejectEnabled: false
+                    approverInputs: []
+        tags: {}
