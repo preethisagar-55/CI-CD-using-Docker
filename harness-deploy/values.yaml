@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: preethisagar114376.jfrog.io/docker-demo/samplewebapp
+  repository: preethisagar114376.jfrog.io/artifactory/docker-demo/samplewebapp
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "268"
@@ -40,8 +40,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: LoadBalancer
-  port: 80
+  type: NodePort
+  port: 8080
 
 ingress:
   enabled: false
