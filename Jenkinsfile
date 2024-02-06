@@ -43,6 +43,21 @@ pipeline {
 		              }
 		          }
 		      }
+		stage('upload maven artifact to jfrog') {
+	                 steps {
+			   rtUpload(
+			     serverId: "artifactory",
+			     spec: '''{
+	                       "files": [
+			         {
+	                           "pattern": "*.war",
+			           "target" : "maven-demo/"
+	                         }
+			       ]
+	                      }''',
+			     )
+			   }
+			 }
 		
 		
 
