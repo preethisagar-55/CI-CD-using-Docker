@@ -1,0 +1,24 @@
+inputSet:
+  name: demo
+  identifier: demo
+  orgIdentifier: default
+  projectIdentifier: sampleappcd
+  pipeline:
+    identifier: sampleappcd
+    stages:
+      - stage:
+          identifier: helmdeploy
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: NativeHelm
+                  spec:
+                    artifacts:
+                      primary:
+                        primaryArtifactRef: dockerdemo
+    properties:
+      ci:
+        codebase:
+          build: <+input>
