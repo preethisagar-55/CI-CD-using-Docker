@@ -58,12 +58,12 @@ pipeline {
 				     
 			    }
                              }
-		 stage('Trivy Scan') {
-			  steps {
-				 sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER'
+		 //stage('Trivy Scan') {
+			  //steps {
+				 //sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER'
 		                 
-			 }
-		     }
+			 //}
+		     //}
 		  
 	                   
 		
