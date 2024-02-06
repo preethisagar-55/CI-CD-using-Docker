@@ -1,5 +1,6 @@
 inputSet:
-  name: demo
+  name: docker
+  tags: {}
   identifier: demo
   orgIdentifier: default
   projectIdentifier: sampleappcd
@@ -18,7 +19,3 @@ inputSet:
                     artifacts:
                       primary:
                         primaryArtifactRef: dockerdemo
-    properties:
-      ci:
-        codebase:
-          build: <+input>
