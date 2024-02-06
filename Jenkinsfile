@@ -58,6 +58,13 @@ pipeline {
 				     
 			    }
                              }
+		 stage('Trivy Scan') {
+			  steps {
+				 sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER'
+		                 
+			 }
+		     }
+		  
 	                   
 		
 
@@ -69,13 +76,6 @@ pipeline {
                                 }
                              }
 		       }  
-		  stage('Trivy Scan') {
-			  steps {
-				 sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER  --output report.html || true'
-		                 sh 'trivy -h'
-                                 sh 'ls -lrth'
-			 }
-		     }
 		  
                  
         //stage('Run Docker container on Jenkins Agent') {
