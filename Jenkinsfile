@@ -14,7 +14,7 @@ pipeline {
 	    //env.USERNAME = 'USERNAME'
 	    //env.PASSWORD = 'PASSWORD'
 	    ARTIFACTORY_URL = 'https://preethisagar114376.jfrog.io'
-	    DOCKER_IMAGE_NAME= 'preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}'
+	    DOCKER_IMAGE_NAME= 'haripreethisagar/ciproject:$BUILD_NUMBER'
 	    DOCKER_TAG = 'latest'
 	    DOCKER_REPO = 'dockerdemo' 
         }
@@ -33,11 +33,21 @@ pipeline {
 				sh 'mvn package'
 			}
 		}
+		stage('Static Code Analysis') {
+		  environment {
+		    SONAR_URL = "http://3.109.212.222:9000"
+		  }
+		        steps {
+		                 withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
+		                 sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+		              }
+		          }
+		      }
 		
 		
 
-	    stage('Docker Build and Tag') {
-		    steps {
+	         stage('Docker Build and Tag') {
+		         steps {
 			          //sh 'docker build -t preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER} --pull=true .'
 				  //sh 'docker images'
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:latest'
@@ -51,14 +61,21 @@ pipeline {
 	                   
 		
 
-        stage('Publish image to Docker Hub') {
-            steps {
+                  stage('Publish image to Docker Hub') {
+                         steps {
                         withDockerRegistry([ credentialsId: "docker", url: "" ]) {
                         sh  'docker push haripreethisagar/ciproject:latest'
                         sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
                                 }
                              }
 		       }  
+		  stage('Trivy Scan') {
+			  steps {
+				 sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER  --output report.html || true'
+		                 sh 'trivy -h'
+                                 sh 'ls -lrth'
+			 }
+		     }
 		  
                  
         //stage('Run Docker container on Jenkins Agent') {
