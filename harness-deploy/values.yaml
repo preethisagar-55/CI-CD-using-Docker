@@ -6,10 +6,10 @@ replicaCount: 1
 
 image: <+artifact.image>  
   //repository: preethisagar114376.jfrog.io/artifactory/docker-demo/samplewebapp
-  //repository: haripreethisagar/ciproject
+repository: haripreethisagar/ciproject
 pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-tag: <+artifact.tag>
+tag: "283"
 
 imagePullSecrets: []
 nameOverride: ""
