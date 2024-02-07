@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-image: <+artifact.image>  
+image:   
   //repository: preethisagar114376.jfrog.io/artifactory/docker-demo/samplewebapp
 repository: haripreethisagar/ciproject
 pullPolicy: IfNotPresent
