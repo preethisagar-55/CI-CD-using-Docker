@@ -1,15 +1,14 @@
-# Default values for harness-deploy.
+# Default values for harness-demo.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
-image:   
-  //repository: preethisagar114376.jfrog.io/artifactory/docker-demo/samplewebapp
-repository: haripreethisagar/ciproject
-pullPolicy: IfNotPresent
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-tag: "283"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -41,8 +40,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: NodePort
-  port: 8080
+  type: ClusterIP
+  port: 80
 
 ingress:
   enabled: false
@@ -72,14 +71,14 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-#livenessProbe:
-  #httpGet:
-    #path: /
-    #port: http
-#readinessProbe:
-  #httpGet:
-    #path: /
-    #port: http
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
 
 autoscaling:
   enabled: false
