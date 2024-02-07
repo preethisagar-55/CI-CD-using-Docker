@@ -10,7 +10,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "283"
 
-imagePullSecrets: []
+imagePullSecrets: 
+- name: jfrog
 nameOverride: ""
 fullnameOverride: ""
 
