@@ -9,7 +9,7 @@ image:
   #repository: haripreethisagar/ciproject
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "268"
+  tag: "285"
 
 imagePullSecrets: 
 - name: jfrog-secret
