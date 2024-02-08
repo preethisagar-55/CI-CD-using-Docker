@@ -33,43 +33,43 @@ pipeline {
 				sh 'mvn package'
 			}
 		}
-		stage('Static Code Analysis') {
+		//stage('Static Code Analysis') {
 		  //environment {
 		    //SONAR_URL = "http://3.109.212.222:9000"
 		  //}
-		        steps {
-		                 withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
-		                 sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-		              }
-		          }
-		      }
-		stage('upload maven artifact to jfrog') {
-	                 steps {
-			   rtUpload(
-			     serverId: "artifactory",
-			     spec: '''{
-	                       "files": [
-			         {
-	                           "pattern": "*.war",
-			           "target" : "maven-demo/"
-	                         }
-			       ]
-	                      }''',
-			     )
-			   }
-			 }
+		        //steps {
+		                 //withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
+		                 //sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+		              //}
+		          //}
+		     // }
+		//stage('upload maven artifact to jfrog') {
+	                 //steps {
+			   //rtUpload(
+			     //serverId: "artifactory",
+			     //spec: '''{
+	                       //"files": [
+			         //{
+	                           //"pattern": "*.war",
+			           //"target" : "maven-demo/"
+	                         //}
+			       //]
+	                      //}''',
+			     //)
+			   //}
+			 //}
 		
 		
 
 	         stage('Docker Build and Tag') {
 		         steps {
-			          //sh 'docker build -t preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER} --pull=true .'
-				  //sh 'docker images'
+			          sh 'docker build -t preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER} --pull=true .'
+				  sh 'docker images'
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:latest'
 				  //sh 'docker tag samplewebapp docker-demo/samplewebapp:$BUILD_NUMBER'
-			          sh 'docker build -t samplewebapp:$BUILD_NUMBER .'
-			          sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
-			          sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
+			          //sh 'docker build -t samplewebapp:$BUILD_NUMBER .'
+			          //sh 'docker tag samplewebapp haripreethisagar/ciproject:latest'
+			          //sh 'docker tag samplewebapp haripreethisagar/ciproject:$BUILD_NUMBER'
 				     
 			    }
                              }
@@ -83,14 +83,14 @@ pipeline {
 	                   
 		
 
-                  stage('Publish image to Docker Hub') {
-                         steps {
-                        withDockerRegistry([ credentialsId: "docker", url: "" ]) {
-                        sh  'docker push haripreethisagar/ciproject:latest'
-                        sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
-                                }
-                             }
-		       }  
+                  //stage('Publish image to Docker Hub') {
+                         //steps {
+                        //withDockerRegistry([ credentialsId: "docker", url: "" ]) {
+                        //sh  'docker push haripreethisagar/ciproject:latest'
+                        //sh  'docker push haripreethisagar/ciproject:$BUILD_NUMBER' 
+                                //}
+                             //}
+		       //}  
 		  
                  
         //stage('Run Docker container on Jenkins Agent') {
@@ -99,14 +99,14 @@ pipeline {
 
                   //}
                    //}
-	//stage('Push Image to Artifactory') {
-	                 //steps {
-			   //rtDockerPush(
-			     //serverId: "artifactory",
-			     //image: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
-			     //targetRepo: 'docker-demo')
-			 //}
-	                //}
+	stage('Push Image to Artifactory') {
+	                 steps {
+			   rtDockerPush(
+			     serverId: "artifactory",
+			     image: "preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}",
+			     targetRepo: 'docker-demo')
+			 }
+	                }
 
                     }
 }
