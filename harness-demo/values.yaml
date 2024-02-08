@@ -12,7 +12,7 @@ image:
   tag: "285"
 
 imagePullSecrets: 
-- name: jfrog-secret
+- name: demo-secret
 nameOverride: ""
 fullnameOverride: ""
 
