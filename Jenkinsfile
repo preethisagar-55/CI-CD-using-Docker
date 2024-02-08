@@ -13,7 +13,7 @@ pipeline {
 	    ARTIFACT_FILE = 'samplewebapp'
 	    //env.USERNAME = 'USERNAME'
 	    //env.PASSWORD = 'PASSWORD'
-	    ARTIFACTORY_URL = 'https://preethisagar114376.jfrog.io'
+	    //ARTIFACTORY_URL = 'https://preethisagar114376.jfrog.io'
 	    DOCKER_IMAGE_NAME= 'haripreethisagar/ciproject:$BUILD_NUMBER'
 	    DOCKER_TAG = 'latest'
 	    DOCKER_REPO = 'dockerdemo' 
