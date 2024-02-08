@@ -5,14 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: preethisagar114376.jfrog.io/docker-demo/samplewebapp
-  #repository: haripreethisagar/ciproject
+  #repository: preethisagar114376.jfrog.io/docker-demo/samplewebapp
+  repository: haripreethisagar/ciproject
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "285"
+  tag: "283"
 
-imagePullSecrets: 
-- name: jfrog-secret
+imagePullSecrets: []
+#- name: jfrog-secret
 nameOverride: ""
 fullnameOverride: ""
 
