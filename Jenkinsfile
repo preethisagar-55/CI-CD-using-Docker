@@ -73,7 +73,7 @@ pipeline {
                              }
 		 /*stage('Trivy Scan') {
 			  steps {
-				 sh 'trivy image haripreethisagar/ciproject:$BUILD_NUMBER'
+				 sh 'trivy image preethisagar114376.jfrog.io/docker-demo/samplewebapp:${BUILD_NUMBER}'
 		                 
 			 }
 		     }
