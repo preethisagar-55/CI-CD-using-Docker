@@ -11,7 +11,7 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   #tag: "285"
-  tag: "<+artifact.tag>"
+  tag: <+pipeline.sequenceId>
 
 imagePullSecrets: 
      - name: demo-secret
