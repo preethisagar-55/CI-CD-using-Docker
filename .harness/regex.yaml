@@ -1,0 +1,82 @@
+pipeline:
+  name: regexpipeline
+  identifier: regexpipeline
+  projectIdentifier: sampleappcd
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: approval
+        identifier: approval
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  name: approval
+                  identifier: approval
+                  type: HarnessApproval
+                  timeout: 1d
+                  spec:
+                    approvalMessage: |-
+                      Please review the following information
+                      and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                      userGroups:
+                        - demogroup
+                    isAutoRejectEnabled: false
+                    approverInputs: []
+        tags: {}
+    - stage:
+        name: dummyhelmdeploy
+        identifier: dummyhelmdeploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: NativeHelm
+          service:
+            serviceRef: demosvc
+            serviceInputs:
+              serviceDefinition:
+                type: NativeHelm
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: demoenv
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: newinfra
+          execution:
+            steps:
+              - step:
+                  name: Helm Deployment
+                  identifier: helmDeployment
+                  type: HelmDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+            rollbackSteps:
+              - step:
+                  name: Helm Rollback
+                  identifier: helmRollback
+                  type: HelmRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+        delegateSelectors:
+          - helm-delegate
+        when:
+          pipelineStatus: Success
