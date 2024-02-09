@@ -6,13 +6,9 @@ pipeline {
 	}
 	environment {
 	    SONAR_AUTH_TOKEN = credentials('sonar')
-	    //ARTIFACTORY_CREDS_ID='jfrogtoken'
-	    //API_KEY = credentials('jfrogAPI')
 	    REPO_NAME = 'dockerdemo'
 	    ARTIFACT_PATH = 'docker-demo/samplewebapp'
 	    ARTIFACT_FILE = 'samplewebapp'
-	    //env.USERNAME = 'USERNAME'
-	    //env.PASSWORD = 'PASSWORD'
 	    //ARTIFACTORY_URL = 'https://preethisagar114376.jfrog.io'
 	    DOCKER_IMAGE_NAME= 'haripreethisagar/ciproject:$BUILD_NUMBER'
 	    DOCKER_TAG = 'latest'
