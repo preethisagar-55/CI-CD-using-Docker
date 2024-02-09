@@ -31,6 +31,9 @@ pipeline:
                     isAutoRejectEnabled: false
                     approverInputs: []
         tags: {}
+        when:
+          pipelineStatus: All
+          condition: skipStage=false
     - stage:
         name: dummyhelmdeploy
         identifier: dummyhelmdeploy
