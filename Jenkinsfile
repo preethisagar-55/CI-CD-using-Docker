@@ -6,7 +6,7 @@ pipeline {
 	}
 	environment {
 	    SONAR_AUTH_TOKEN = credentials('sonar')
-	    //REPO_NAME = 'dockerdemo'
+	    REPO_NAME = 'dockerdemo'
 	    ARTIFACT_PATH = 'docker-demo/samplewebapp'
 	    ARTIFACT_FILE = 'samplewebapp'
 	    //ARTIFACTORY_URL = 'https://preethisagar114376.jfrog.io'
