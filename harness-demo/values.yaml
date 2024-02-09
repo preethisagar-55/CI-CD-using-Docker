@@ -5,13 +5,13 @@
 replicaCount: 1
 
 image: 
-  #repository: preethisagar114376.jfrog.io/docker-demo/samplewebapp
-  repository: <+artifact.connectorRef>/<+artifact.imagePath>
+  repository: preethisagar114376.jfrog.io/docker-demo/samplewebapp
+  #repository: <+artifact.connectorRef>/<+artifact.imagePath>
   #repository: haripreethisagar/ciproject
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  #tag: "285"
-  tag: <+pipeline.sequenceId>
+  tag: "285"
+  #tag: "<+artifact.tag>"
 
 imagePullSecrets: 
      - name: demo-secret
@@ -45,7 +45,7 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 80
+  port: 8080
   
   
   
