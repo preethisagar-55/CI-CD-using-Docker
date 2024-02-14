@@ -1,0 +1,55 @@
+pipeline:
+  name: Database
+  identifier: Database
+  projectIdentifier: sampleappcd
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: db
+        identifier: db
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Ssh
+          service:
+            serviceRef: DB_Connection
+          environment:
+            environmentRef: Dev
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: infra
+          execution:
+            steps:
+              - step:
+                  type: Command
+                  name: Command_1
+                  identifier: Command_1
+                  spec:
+                    onDelegate: false
+                    environmentVariables: []
+                    outputVariables: []
+                    commandUnits:
+                      - identifier: Command
+                        name: Command
+                        type: Script
+                        spec:
+                          workingDirectory: /tmp
+                          shell: Bash
+                          source:
+                            type: Inline
+                            spec:
+                              script: echo "hi"
+                  timeout: 10m
+            rollbackSteps: []
+        tags: {}
+        delegateSelectors:
+          - helm-delegate
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+        when:
+          pipelineStatus: Success
