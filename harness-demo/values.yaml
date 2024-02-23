@@ -5,12 +5,12 @@
 replicaCount: 1
 
 image: 
-  repository: preethisagar114376.jfrog.io/docker-demo/samplewebapp
+  #repository: preethisagar114376.jfrog.io/docker-demo/samplewebapp
   #repository: <+artifact.connectorRef>/<+artifact.imagePath>
-  #repository: haripreethisagar/ciproject
+  repository: haripreethisagar/ciproject
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "<+lastPublished.tag>"
+  tag: 283
   #tag: "<+artifact.tag>"
 
 imagePullSecrets: 
